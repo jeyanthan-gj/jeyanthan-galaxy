@@ -92,21 +92,20 @@ export default function Navigation() {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <div className="flex items-center justify-between gap-2 lg:gap-8">
-          {/* Logo/Brand */}
           <motion.button
             onClick={() => scrollToSection('home')}
-            className="flex items-center gap-2 lg:gap-3 text-foreground font-bold text-base lg:text-lg whitespace-nowrap"
+            className="flex items-center gap-2 text-foreground font-bold text-base whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-foreground font-bold text-xs lg:text-sm">JG</span>
+            <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow-primary">
+              <span className="text-primary-foreground font-bold text-xs">JG</span>
             </div>
-            <span className="hidden lg:block">Jeyanthan GJ</span>
+            <span className="hidden 2xl:block ml-1">Jeyanthan GJ</span>
           </motion.button>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-1">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.id}
@@ -134,7 +133,7 @@ export default function Navigation() {
             variant="ghost"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-1 h-9 w-9 flex items-center justify-center rounded-full hover:bg-primary/10"
+            className="xl:hidden p-1 h-9 w-9 flex items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
           >
             <motion.div
               animate={{ rotate: isOpen ? 180 : 0 }}
@@ -150,7 +149,7 @@ export default function Navigation() {
       {/* Mobile Navigation Menu */}
       <motion.div
         className={cn(
-          "fixed inset-0 z-40 lg:hidden",
+          "fixed inset-0 z-40 xl:hidden",
           "bg-background/98 backdrop-blur-xl",
           isOpen ? "block pointer-events-auto" : "hidden pointer-events-none"
         )}
