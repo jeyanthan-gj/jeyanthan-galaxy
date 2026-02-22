@@ -120,7 +120,7 @@ export default function About() {
         </motion.div>
 
         {/* Main content grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {/* Who am I card */}
           <motion.div
@@ -146,7 +146,7 @@ export default function About() {
                     <img
                       src="/74754.JPG"
                       alt="Jeyanthan GJ - Portfolio Photo"
-                      className="w-48 h-56 rounded-[2.5rem] object-cover object-top border-4 border-primary/20 shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                      className="w-40 h-48 md:w-48 md:h-56 rounded-[2.5rem] object-cover object-top border-4 border-primary/20 shadow-lg hover:shadow-primary/20 transition-all duration-300"
                     />
                     <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-0 hover:opacity-10 transition-opacity duration-300" />
                   </div>
@@ -202,20 +202,20 @@ export default function About() {
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                   >
-                    <div className="p-2 rounded-full bg-primary/10">
+                    <div className="p-2 rounded-full bg-primary/10 flex-shrink-0">
                       <info.icon className="w-4 h-4 text-primary" />
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground">{info.label}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">{info.label}</p>
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-foreground hover:text-primary transition-colors"
+                          className="text-sm md:text-base text-foreground hover:text-primary transition-colors block truncate hover:text-clip hover:whitespace-normal break-all"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-foreground">{info.value}</p>
+                        <p className="text-sm md:text-base text-foreground break-all">{info.value}</p>
                       )}
                     </div>
                   </motion.div>

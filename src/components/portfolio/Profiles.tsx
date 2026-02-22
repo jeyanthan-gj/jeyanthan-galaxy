@@ -174,8 +174,8 @@ export default function Profiles() {
                 </CardTitle>
                 <div className="w-16 h-1 bg-gradient-primary rounded-full" />
               </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
+              <CardContent className="p-4 sm:p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                   {profile.projects.map((project, index) => (
                     <motion.div
                       key={index}

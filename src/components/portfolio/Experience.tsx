@@ -163,8 +163,8 @@ export default function Experience() {
             >
               <Card className="floating-card h-full transform-3d">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
-                    <Users className="w-7 h-7 text-primary" />
+                  <CardTitle className="flex items-center gap-2 md:gap-3 text-xl md:text-2xl">
+                    <Users className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                     Leadership & Responsibility
                   </CardTitle>
                   <div className="w-16 h-1 bg-gradient-primary rounded-full" />
@@ -180,18 +180,18 @@ export default function Experience() {
                     >
                       {/* Timeline connector */}
                       {index < leadership.length - 1 && (
-                        <div className="absolute left-6 top-12 w-0.5 h-16 bg-gradient-to-b from-primary to-transparent" />
+                        <div className="absolute left-6 top-12 w-0.5 h-16 bg-gradient-to-b from-primary to-transparent hidden sm:block" />
                       )}
 
                       <div className="flex items-start gap-4">
                         <div className="p-2 rounded-full bg-primary/20 group-hover:bg-primary/30 transition-colors flex-shrink-0">
                           {item.icon}
                         </div>
-                        <div className="flex-1">
-                          <h6 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        <div className="flex-1 min-w-0">
+                          <h6 className="font-semibold text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
                             {item.role}
                           </h6>
-                          <p className="text-sm text-primary mb-1">
+                          <p className="text-sm text-primary mb-1 break-words">
                             {item.organization}
                           </p>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
@@ -219,8 +219,8 @@ export default function Experience() {
             >
               <Card className="floating-card h-full transform-3d">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
-                    <Building className="w-7 h-7 text-accent" />
+                  <CardTitle className="flex items-center gap-2 md:gap-3 text-xl md:text-2xl">
+                    <Building className="w-6 h-6 md:w-7 md:h-7 text-accent" />
                     Industrial Visits
                   </CardTitle>
                   <div className="w-16 h-1 bg-gradient-to-r from-accent to-primary rounded-full" />

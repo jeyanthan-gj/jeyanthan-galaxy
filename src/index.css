@@ -117,8 +117,20 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html, body {
+    @apply overflow-x-hidden w-full;
+    max-width: 100vw;
+  }
+
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
+  }
+
+  /* Responsive typography */
+  @media (max-width: 640px) {
+    h1 { @apply text-3xl; }
+    h2 { @apply text-2xl; }
+    h3 { @apply text-xl; }
   }
 
   /* 3D Animation utilities */
@@ -128,6 +140,16 @@ All colors MUST be HSL.
 
   .backface-hidden {
     backface-visibility: hidden;
+  }
+
+  /* Global text wrapping */
+  .break-all {
+    word-break: break-all;
+  }
+
+  .break-words {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* Glow effects */

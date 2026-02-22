@@ -75,7 +75,7 @@ export default function Header() {
 
         {/* Social links floating at the top */}
         <motion.div
-          className="flex justify-center gap-6 mb-12"
+          className="flex justify-center gap-3 md:gap-6 mb-12"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -87,7 +87,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              className={`p-3 rounded-full bg-card/20 backdrop-blur-sm border border-border/30 
+              className={`p-2.5 md:p-3 rounded-full bg-card/20 backdrop-blur-sm border border-border/30 
                          text-muted-foreground transition-all duration-300 
                          hover:bg-card/40 hover:border-primary/50 hover:shadow-glow-primary
                          transform hover:scale-110 ${social.color}`}
@@ -101,7 +101,7 @@ export default function Header() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
             >
-              <social.icon size={24} />
+              <social.icon className="w-5 h-5 md:w-6 md:h-6" />
             </motion.a>
           ))}
         </motion.div>
@@ -109,7 +109,7 @@ export default function Header() {
         {/* Subtitle with floating animation */}
         <motion.h4
           ref={subtitleRef}
-          className="text-lg md:text-xl text-muted-foreground mb-4 font-light tracking-wide"
+          className="text-base md:text-xl text-muted-foreground mb-4 font-light tracking-wide"
           animate={{ y: [0, -10, 0] }}
           transition={{
             duration: 4,
@@ -124,7 +124,7 @@ export default function Header() {
         <div className="mb-6">
           <h1
             ref={titleRef}
-            className="text-4xl md:text-7xl lg:text-8xl font-bold 
+            className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold 
                        bg-gradient-primary bg-clip-text text-transparent
                        animate-glow-pulse relative"
           >

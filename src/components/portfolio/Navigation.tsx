@@ -30,13 +30,13 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false); // Hide on scroll down
       } else {
         setIsVisible(true); // Show on scroll up
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -82,8 +82,8 @@ export default function Navigation() {
       <motion.nav
         className={cn(
           "fixed top-4 left-1/2 transform -translate-x-1/2 z-50",
-          "nav-glass rounded-full px-6 py-3",
-          "transition-all duration-300",
+          "nav-glass rounded-full px-4 md:px-6 py-2 md:py-3",
+          "transition-all duration-300 w-[95%] md:w-auto max-w-4xl",
           isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         )}
         style={{ y: navY }}
@@ -91,18 +91,18 @@ export default function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           {/* Logo/Brand */}
           <motion.button
             onClick={() => scrollToSection('home')}
-            className="flex items-center gap-3 text-foreground font-bold text-lg"
+            className="flex items-center gap-2 md:gap-3 text-foreground font-bold text-base md:text-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">JG</span>
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-[10px] md:text-sm">JG</span>
             </div>
-            <span className="hidden md:block">Jeyanthan GJ</span>
+            <span className="hidden sm:block">Jeyanthan GJ</span>
           </motion.button>
 
           {/* Desktop Navigation */}
@@ -114,8 +114,8 @@ export default function Navigation() {
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
                   "hover:bg-primary/20 hover:text-primary",
-                  activeSection === item.id 
-                    ? "bg-primary text-primary-foreground shadow-glow-primary" 
+                  activeSection === item.id
+                    ? "bg-primary text-primary-foreground shadow-glow-primary"
                     : "text-muted-foreground"
                 )}
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -134,13 +134,13 @@ export default function Navigation() {
             variant="ghost"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-1 h-8 w-8"
           >
             <motion.div
               animate={{ rotate: isOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
             </motion.div>
           </Button>
         </div>
@@ -168,13 +168,13 @@ export default function Navigation() {
                 activeSection === item.id ? "text-primary" : "text-foreground"
               )}
               initial={{ opacity: 0, y: 50 }}
-              animate={{ 
-                opacity: isOpen ? 1 : 0, 
-                y: isOpen ? 0 : 50 
+              animate={{
+                opacity: isOpen ? 1 : 0,
+                y: isOpen ? 0 : 50
               }}
-              transition={{ 
-                duration: 0.5, 
-                delay: isOpen ? index * 0.1 : 0 
+              transition={{
+                duration: 0.5,
+                delay: isOpen ? index * 0.1 : 0
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
