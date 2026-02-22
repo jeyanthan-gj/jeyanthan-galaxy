@@ -124,7 +124,7 @@ export default function Header() {
         <div className="mb-6">
           <h1
             ref={titleRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold 
+            className="text-4xl md:text-7xl lg:text-8xl font-bold 
                        bg-gradient-primary bg-clip-text text-transparent
                        animate-glow-pulse relative"
           >

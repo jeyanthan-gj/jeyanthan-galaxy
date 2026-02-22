@@ -159,12 +159,12 @@ export default function Profiles() {
         {/* Profile content */}
         <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          {/* Projects card - Spans 2 columns */}
+          {/* Projects card - Spans 2 columns on tablet and desktop */}
           <motion.div
             variants={cardVariants}
             initial="initial"
             whileHover="hover"
-            className="lg:col-span-2"
+            className="md:col-span-2 lg:col-span-2"
           >
             <Card className="floating-card h-full">
               <CardHeader>
@@ -219,7 +219,7 @@ export default function Profiles() {
             variants={cardVariants}
             initial="initial"
             whileHover="hover"
-            className="lg:col-span-1"
+            className="md:col-span-1 lg:col-span-1"
           >
             <Card className="floating-card h-full">
               <CardHeader>
@@ -267,7 +267,7 @@ export default function Profiles() {
             variants={cardVariants}
             initial="initial"
             whileHover="hover"
-            className="lg:col-span-1"
+            className="md:col-span-1 lg:col-span-1"
           >
             <Card className="floating-card h-full">
               <CardHeader>
@@ -327,12 +327,12 @@ export default function Profiles() {
           </motion.div>
 
 
-          {/* Certificates card - spans 2 columns */}
+          {/* Certificates card - spans 2 columns on tablet and desktop */}
           <motion.div
             variants={cardVariants}
             initial="initial"
             whileHover="hover"
-            className="lg:col-span-2"
+            className="md:col-span-2 lg:col-span-2"
           >
             <Card className="floating-card h-full">
               <CardHeader>
