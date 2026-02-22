@@ -16,38 +16,38 @@ const Index = () => {
     <div className="relative min-h-screen">
       {/* 3D Animated Background */}
       <SpaceBackground />
-      
+
       {/* Navigation */}
       <Navigation />
-      
+
       {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="relative z-10 mx-auto">
         {/* Hero Section */}
         <section id="home">
           <Header />
         </section>
-        
+
         {/* About Section */}
         <section id="about">
           <About />
         </section>
-        
+
         {/* Profiles Section */}
         <section id="profiles">
           <Profiles />
         </section>
-        
+
         {/* Experience Section */}
         <section id="experience">
           <Experience />
         </section>
-        
+
         {/* Contact Section */}
         <section id="contact">
           <Contact />
         </section>
       </main>
-      
+
       {/* Footer */}
       <Footer />
     </div>

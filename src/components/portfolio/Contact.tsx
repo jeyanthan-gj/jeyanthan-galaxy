@@ -18,7 +18,7 @@ export default function Contact() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const { toast } = useToast();
@@ -54,7 +54,7 @@ export default function Contact() {
     },
     {
       icon: <Github className="w-6 h-6" />,
-      label: "GitHub", 
+      label: "GitHub",
       href: "https://github.com/jeyanthan-gj",
       color: "text-gray-400",
       bgColor: "bg-gray-400/10"
@@ -94,7 +94,7 @@ export default function Contact() {
   // Handle form submission via WhatsApp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate form
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({
@@ -117,10 +117,10 @@ Message: ${formData.message}`;
 
       const phoneNumber = "9976719167";
       const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(formattedMessage)}`;
-      
+
       // Open WhatsApp in new tab
       window.open(whatsappLink, "_blank");
-      
+
       // Show success toast
       toast({
         title: "Message Prepared!",
@@ -129,7 +129,7 @@ Message: ${formData.message}`;
 
       // Reset form
       setFormData({ name: '', email: '', message: '' });
-      
+
     } catch (error) {
       toast({
         title: "Error",
@@ -144,30 +144,30 @@ Message: ${formData.message}`;
   // Animation variants
   const cardVariants = {
     initial: { scale: 1, rotateY: 0 },
-    hover: { 
-      scale: 1.05, 
+    hover: {
+      scale: 1.05,
       rotateY: 5,
-      transition: { 
-        type: "spring" as const, 
-        stiffness: 300, 
-        damping: 20 
+      transition: {
+        type: "spring" as const,
+        stiffness: 300,
+        damping: 20
       }
     }
   };
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="contact" 
+    <section
+      ref={sectionRef}
+      id="contact"
       className="py-20 px-4 relative overflow-hidden"
     >
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-bl from-primary/5 via-transparent to-accent/5" />
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }} />
-      
+
       <div className="container mx-auto max-w-6xl relative z-10">
-        
+
         {/* Section header */}
         <motion.div
           className="text-center mb-16"
@@ -175,21 +175,21 @@ Message: ${formData.message}`;
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Get In <span className="text-primary">Touch</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-6" />
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Have a project in mind? Let's discuss how we can work together to bring your ideas to life.
           </p>
         </motion.div>
 
         {/* Content grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
           {/* Contact form */}
           <motion.div
-            className="lg:col-span-2"
+            className="md:col-span-2 lg:col-span-2"
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -201,8 +201,8 @@ Message: ${formData.message}`;
             >
               <Card className="floating-card transform-3d">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
-                    <MessageCircle className="w-7 h-7 text-primary" />
+                  <CardTitle className="flex items-center gap-2 md:gap-3 text-xl md:text-2xl">
+                    <MessageCircle className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                     Send a Message
                   </CardTitle>
                   <div className="w-16 h-1 bg-gradient-primary rounded-full" />
@@ -224,7 +224,7 @@ Message: ${formData.message}`;
                         className="bg-secondary/50 border-border/50 focus:border-primary transition-all duration-300"
                       />
                     </motion.div>
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -240,7 +240,7 @@ Message: ${formData.message}`;
                         className="bg-secondary/50 border-border/50 focus:border-primary transition-all duration-300"
                       />
                     </motion.div>
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -256,7 +256,7 @@ Message: ${formData.message}`;
                         className="bg-secondary/50 border-border/50 focus:border-primary transition-all duration-300 resize-none"
                       />
                     </motion.div>
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -296,7 +296,7 @@ Message: ${formData.message}`;
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            
+
             {/* Contact information */}
             <motion.div
               variants={cardVariants}
@@ -322,9 +322,9 @@ Message: ${formData.message}`;
                       <div className={`p-3 rounded-full ${info.bgColor} ${info.color} group-hover:scale-110 transition-transform`}>
                         {info.icon}
                       </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{info.label}</p>
-                        <p className="font-medium text-foreground group-hover:text-primary transition-colors">
+                      <div className="min-w-0">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">{info.label}</p>
+                        <p className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base break-all">
                           {info.value}
                         </p>
                       </div>
@@ -346,7 +346,7 @@ Message: ${formData.message}`;
                   <div className="w-16 h-1 bg-gradient-primary rounded-full" />
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-2 md:gap-3">
                     {socialLinks.map((social, index) => (
                       <motion.a
                         key={index}
