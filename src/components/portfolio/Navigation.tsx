@@ -82,8 +82,8 @@ export default function Navigation() {
       <motion.nav
         className={cn(
           "fixed top-4 left-1/2 transform -translate-x-1/2 z-50",
-          "nav-glass rounded-full px-4 md:px-6 py-2 md:py-3",
-          "transition-all duration-300 w-[95%] md:w-auto max-w-4xl",
+          "nav-glass rounded-full px-4 lg:px-6 py-2 lg:py-3",
+          "transition-all duration-300 w-[95%] lg:w-auto max-w-5xl",
           isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         )}
         style={{ y: navY }}
@@ -91,29 +91,29 @@ export default function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 lg:gap-8">
           {/* Logo/Brand */}
           <motion.button
             onClick={() => scrollToSection('home')}
-            className="flex items-center gap-2 md:gap-3 text-foreground font-bold text-base md:text-lg"
+            className="flex items-center gap-2 lg:gap-3 text-foreground font-bold text-base lg:text-lg whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-[10px] md:text-sm">JG</span>
+            <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+              <span className="text-primary-foreground font-bold text-xs lg:text-sm">JG</span>
             </div>
-            <span className="hidden sm:block">Jeyanthan GJ</span>
+            <span className="hidden lg:block">Jeyanthan GJ</span>
           </motion.button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                  "hover:bg-primary/20 hover:text-primary",
+                  "hover:bg-primary/20 hover:text-primary whitespace-nowrap",
                   activeSection === item.id
                     ? "bg-primary text-primary-foreground shadow-glow-primary"
                     : "text-muted-foreground"
@@ -134,13 +134,14 @@ export default function Navigation() {
             variant="ghost"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-1 h-8 w-8"
+            className="lg:hidden p-1 h-9 w-9 flex items-center justify-center rounded-full hover:bg-primary/10"
           >
             <motion.div
               animate={{ rotate: isOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
+              className="flex items-center justify-center"
             >
-              {isOpen ? <X size={18} /> : <Menu size={18} />}
+              {isOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
             </motion.div>
           </Button>
         </div>
@@ -149,9 +150,9 @@ export default function Navigation() {
       {/* Mobile Navigation Menu */}
       <motion.div
         className={cn(
-          "fixed inset-0 z-40 md:hidden",
-          "bg-background/95 backdrop-blur-lg",
-          isOpen ? "pointer-events-auto" : "pointer-events-none"
+          "fixed inset-0 z-40 lg:hidden",
+          "bg-background/98 backdrop-blur-xl",
+          isOpen ? "block pointer-events-auto" : "hidden pointer-events-none"
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: isOpen ? 1 : 0 }}
