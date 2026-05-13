@@ -20,7 +20,10 @@ import {
 } from '@/data/portfolioData';
 
 // ─── Auth Gate ────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = "jeyanthan2024";
+const DEFAULT_PASSWORD = "jeyanthan2024";
+const PW_STORAGE_KEY = "jg_admin_password";
+function getStoredPassword() { return localStorage.getItem(PW_STORAGE_KEY) || DEFAULT_PASSWORD; }
+function setStoredPassword(pw: string) { localStorage.setItem(PW_STORAGE_KEY, pw); }
 
 function AuthGate({ onAuth }: { onAuth: () => void }) {
   const [pw, setPw] = useState('');
@@ -29,7 +32,7 @@ function AuthGate({ onAuth }: { onAuth: () => void }) {
   const [shake, setShake] = useState(false);
 
   const handleLogin = () => {
-    if (pw === ADMIN_PASSWORD) {
+    if (pw === getStoredPassword()) {
       onAuth();
     } else {
       setError('Incorrect password');
@@ -108,9 +111,7 @@ function AuthGate({ onAuth }: { onAuth: () => void }) {
               </Button>
             </div>
 
-            <p className="text-center text-xs mt-6" style={{ color: 'hsl(215 20% 45%)' }}>
-              Default password: <code className="font-mono" style={{ color: 'hsl(210 100% 56%)' }}>jeyanthan2024</code>
-            </p>
+
           </div>
         </motion.div>
       </motion.div>
@@ -498,6 +499,89 @@ function ContactEditor({ data, onChange }: { data: PortfolioData['contact']; onC
   );
 }
 
+
+// ─── Change Password ──────────────────────────────────────────────────────────
+function ChangePasswordEditor() {
+  const [current, setCurrent] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const { toast } = useToast();
+
+  const handleChange = () => {
+    setError('');
+    if (!current || !newPw || !confirm) { setError('All fields are required.'); return; }
+    if (current !== getStoredPassword()) { setError('Current password is incorrect.'); return; }
+    if (newPw.length < 6) { setError('New password must be at least 6 characters.'); return; }
+    if (newPw !== confirm) { setError('New passwords do not match.'); return; }
+    setStoredPassword(newPw);
+    setSuccess(true);
+    setCurrent(''); setNewPw(''); setConfirm('');
+    toast({ title: "Password changed!", description: "Your admin password has been updated." });
+    setTimeout(() => setSuccess(false), 3000);
+  };
+
+  const PasswordInput = ({ label, value, onChange, show, onToggle }: { label: string; value: string; onChange: (v: string) => void; show: boolean; onToggle: () => void }) => (
+    <div>
+      <FieldLabel>{label}</FieldLabel>
+      <div className="relative">
+        <Input type={show ? 'text' : 'password'} value={value} onChange={e => { onChange(e.target.value); setError(''); }}
+          className="pr-10 text-white text-sm"
+          style={{ background: 'hsl(220 15% 10%)', borderColor: error ? 'hsl(0 84% 60%)' : 'hsl(220 15% 22%)' }} />
+        <button type="button" onClick={onToggle}
+          className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50 hover:opacity-100 transition-opacity">
+          {show ? <EyeOff className="w-4 h-4 text-white" /> : <Eye className="w-4 h-4 text-white" />}
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="space-y-6 max-w-md">
+      <SectionHeader icon={Lock} title="Change Password" />
+
+      <div className="rounded-xl border p-5 space-y-4"
+        style={{ background: 'hsl(220 15% 10%)', borderColor: 'hsl(220 15% 18%)' }}>
+        <PasswordInput label="Current Password" value={current} onChange={setCurrent} show={showCurrent} onToggle={() => setShowCurrent(!showCurrent)} />
+        <PasswordInput label="New Password" value={newPw} onChange={setNewPw} show={showNew} onToggle={() => setShowNew(!showNew)} />
+        <PasswordInput label="Confirm New Password" value={confirm} onChange={setConfirm} show={showConfirm} onToggle={() => setShowConfirm(!showConfirm)} />
+
+        {error && (
+          <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg"
+            style={{ background: 'hsl(0 84% 60% / 0.1)', color: 'hsl(0 84% 65%)', border: '1px solid hsl(0 84% 60% / 0.3)' }}>
+            <AlertCircle className="w-4 h-4 flex-shrink-0" /> {error}
+          </motion.div>
+        )}
+
+        {success && (
+          <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg"
+            style={{ background: 'hsl(142 70% 45% / 0.1)', color: 'hsl(142 70% 55%)', border: '1px solid hsl(142 70% 45% / 0.3)' }}>
+            <CheckCircle className="w-4 h-4 flex-shrink-0" /> Password changed successfully!
+          </motion.div>
+        )}
+
+        <Button onClick={handleChange} className="w-full font-semibold"
+          style={{ background: 'linear-gradient(135deg, hsl(210 100% 56%), hsl(275 100% 60%))' }}>
+          <Lock className="w-4 h-4 mr-2" /> Update Password
+        </Button>
+      </div>
+
+      <div className="rounded-xl border p-4" style={{ background: 'hsl(38 92% 50% / 0.05)', borderColor: 'hsl(38 92% 50% / 0.2)' }}>
+        <p className="text-xs font-semibold mb-1" style={{ color: 'hsl(38 92% 60%)' }}>⚠️ Important</p>
+        <p className="text-xs" style={{ color: 'hsl(215 20% 55%)' }}>
+          Password is stored in your browser's localStorage. Clearing browser data will reset it to the default: <code className="font-mono" style={{ color: 'hsl(210 100% 60%)' }}>jeyanthan2024</code>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Admin Dashboard ─────────────────────────────────────────────────────
 const NAV_ITEMS = [
   { id: 'hero', label: 'Hero', icon: User },
@@ -505,6 +589,7 @@ const NAV_ITEMS = [
   { id: 'profiles', label: 'Profiles', icon: Code },
   { id: 'experience', label: 'Experience', icon: Briefcase },
   { id: 'contact', label: 'Contact', icon: Mail },
+  { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
 function Dashboard({ onLogout }: { onLogout: () => void }) {
@@ -536,6 +621,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
     profiles: <ProfilesEditor data={data.profiles} onChange={v => update('profiles', v)} />,
     experience: <ExperienceEditor data={data.experience} onChange={v => update('experience', v)} />,
     contact: <ContactEditor data={data.contact} onChange={v => update('contact', v)} />,
+    settings: <ChangePasswordEditor />,
   };
 
   return (
