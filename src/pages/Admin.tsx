@@ -20,10 +20,10 @@ import {
 } from '@/data/portfolioData';
 
 // ─── Auth Gate ────────────────────────────────────────────────────────────────
-const DEFAULT_PASSWORD = "jeyanthan2024";
-const PW_STORAGE_KEY = "jg_admin_password";
-function getStoredPassword() { return localStorage.getItem(PW_STORAGE_KEY) || DEFAULT_PASSWORD; }
-function setStoredPassword(pw: string) { localStorage.setItem(PW_STORAGE_KEY, pw); }
+// ⬇️ Change this to update the admin password
+const ADMIN_PASSWORD = "jeyanthan2024";
+function getStoredPassword() { return ADMIN_PASSWORD; }
+function setStoredPassword(_pw: string) { /* password is set in code */ }
 
 function AuthGate({ onAuth }: { onAuth: () => void }) {
   const [pw, setPw] = useState('');
@@ -509,6 +509,7 @@ function ChangePasswordEditor() {
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
   const [error, setError] = useState('');
   const { toast } = useToast();
 
@@ -520,9 +521,9 @@ function ChangePasswordEditor() {
     if (newPw !== confirm) { setError('New passwords do not match.'); return; }
     setStoredPassword(newPw);
     setSuccess(true);
+    setNewPassword(newPw);
     setCurrent(''); setNewPw(''); setConfirm('');
-    toast({ title: "Password changed!", description: "Your admin password has been updated." });
-    setTimeout(() => setSuccess(false), 3000);
+    toast({ title: "Password updated for this session!", description: "Update ADMIN_PASSWORD in Admin.tsx to make it permanent." });
   };
 
   const PasswordInput = ({ label, value, onChange, show, onToggle }: { label: string; value: string; onChange: (v: string) => void; show: boolean; onToggle: () => void }) => (
@@ -560,9 +561,16 @@ function ChangePasswordEditor() {
 
         {success && (
           <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg"
+            className="space-y-2 text-sm px-3 py-3 rounded-lg"
             style={{ background: 'hsl(142 70% 45% / 0.1)', color: 'hsl(142 70% 55%)', border: '1px solid hsl(142 70% 45% / 0.3)' }}>
-            <CheckCircle className="w-4 h-4 flex-shrink-0" /> Password changed successfully!
+            <div className="flex items-center gap-2 font-medium">
+              <CheckCircle className="w-4 h-4 flex-shrink-0" /> Active for this session!
+            </div>
+            <p className="text-xs opacity-80">To make it permanent, update this line in <strong>Admin.tsx</strong>:</p>
+            <code className="block text-xs px-2 py-1.5 rounded font-mono break-all"
+              style={{ background: 'hsl(220 15% 8%)', color: 'hsl(210 100% 70%)' }}>
+              {`const ADMIN_PASSWORD = "${newPassword}";`}
+            </code>
           </motion.div>
         )}
 
@@ -573,9 +581,11 @@ function ChangePasswordEditor() {
       </div>
 
       <div className="rounded-xl border p-4" style={{ background: 'hsl(38 92% 50% / 0.05)', borderColor: 'hsl(38 92% 50% / 0.2)' }}>
-        <p className="text-xs font-semibold mb-1" style={{ color: 'hsl(38 92% 60%)' }}>⚠️ Important</p>
+        <p className="text-xs font-semibold mb-1" style={{ color: 'hsl(38 92% 60%)' }}>ℹ️ How to change password</p>
         <p className="text-xs" style={{ color: 'hsl(215 20% 55%)' }}>
-          Password is stored in your browser's localStorage. Clearing browser data will reset it to the default: <code className="font-mono" style={{ color: 'hsl(210 100% 60%)' }}>jeyanthan2024</code>
+          Password is stored in the source code (<code className="font-mono" style={{ color: 'hsl(210 100% 60%)' }}>src/pages/Admin.tsx</code>).
+          Enter your new password above and click Update — it will apply immediately for this session.
+          To make it permanent, commit the updated file to your repo.
         </p>
       </div>
     </div>
